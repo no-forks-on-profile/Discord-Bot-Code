@@ -2,7 +2,7 @@
 Discord Bot Code...?
 
 # This is the rep for storing and pulling out Discord Bot code, if you'd like to contribute, you may, this is where we'll post code for
-# public to use. 
+# public use.
 
 # IMPORTANT:
 # If you come across code that need updating, or is broken and needs fixing, please let us know, thank you.
