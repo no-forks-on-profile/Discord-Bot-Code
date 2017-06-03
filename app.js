@@ -1,9 +1,6 @@
-# 'This is JavaScript bot code, the code I am giving works 100% and already has commands programmed into it, you are welcome
-# I have inserted things link "<your bots invite link>" and "<botName>" make sure to replace the following! (There are more of those, 
-# I just gave two as an example'
-
-# 'This will be your main bot file if you were wondering, although you could sort the commands and other stuff into other files 
-# and call them'
+# This is JavaScript code, I used this with my bot, it's still in working order, as long as you're using the correct Node version.
+# This also comes with commands, I have highlighted certain zones where my bot link was, or my bot name was, for you to replace with your 
+# own.
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
