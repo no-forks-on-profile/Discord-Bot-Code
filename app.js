@@ -1,4 +1,4 @@
-# 'This is JavaScript bot code, the code I am giving works 100% and already has commands programmed into it, you\'re welcome
+# 'This is JavaScript bot code, the code I am giving works 100% and already has commands programmed into it, you are welcome
 # I have inserted things link "<your bots invite link>" and "<botName>" make sure to replace the following! (There are more of those, 
 # I just gave two as an example'
 
