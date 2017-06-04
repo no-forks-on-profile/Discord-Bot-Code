@@ -1,6 +1,7 @@
-# This is JavaScript code, I used this with my bot, it's still in working order, as long as you're using the correct Node version.
-# This also comes with commands, I have highlighted certain zones where my bot link was, or my bot name was, for you to replace with your 
-# own.
+/* This is JavaScript code, I used this with my bot, it's still in working order, as long as you're using the correct Node version.
+This also comes with commands, I have highlighted certain zones where my bot link was, or my bot name was, for you to replace with your 
+own.
+*/
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
