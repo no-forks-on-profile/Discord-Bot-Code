@@ -1,11 +1,30 @@
-# BotCode
-Discord Bot Code...?
+BotCode / Fr33Software:
+As you probably know, this repository comes from an organization called 'Fr33Software', Fr33Software produces free to use code, but it's not all free. There are copyright laws and certain rules, please read this before continuing.
 
-# This is the rep for storing and pulling out Discord Bot code, if you'd like to contribute, you may, this is where we'll post code for
-# public use.
+Broken/Old Code Sorting and Fixing:
+To do this, myself (and other contributors) will edit/fork and edit code, if they're outdated (although it may take some time) they'll be fixed.
 
-# IMPORTANT:
-# If you come across code that need updating, or is broken and needs fixing, please let us know, thank you.
+License:
+All code is free to use, but under the condition of the MIT License, found below: 
 
-# Broken Code and File Handling:
-# Private code will be kept hidden from use as it is either broken, being fixed, or anything else.
+The MIT License (MIT)
+
+Copyright (c) 2013 Thomas Park
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
