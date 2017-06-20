@@ -42,6 +42,24 @@ client.on('guildCreate', guild => {
   guild.defaultChannel.send('Hey! Thanks for inviting me to your server!\n\n- To see my commands, do: ~help\nTo see my support server, go to: <YourURL>')
 });
 
+client.on("guildMemberAdd", (member) => {
+  const guild = member.guild;
+  if (!newUsers[guild.id]) newUsers[guild.id] = new Discord.Collection();
+  newUsers[guild.id].set(member.id, member.user);
+
+  if (newUsers[guild.id].size > 10) {
+    const userlist = newUsers[guild.id].map(u => u.toString()).join(" ");
+    let welcome = message.guild.channels.find("name", "welcome-log");
+    welcome.send("Welcome our new members to the server!\n" + userlist);
+    newUsers[guild.id].clear();
+  }
+});
+
+client.on("guildMemberRemove", (member) => {
+  const guild = member.guild;
+  if (newUsers[guild.id].includes(member.id)) newUsers.delete(member.id);
+});
+
 // Message Handler Event (Commands Go Inside)
 client.on('message', message => {
   if(!message.content.startsWith(config.prefix)) return;
