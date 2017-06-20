@@ -12,7 +12,7 @@ const client = new Discord.Client();
 const config = require('./config.json');
 
 client.on('ready', () => {
-  console.log('I am ready!');
+  console.log(`Logged in as ${client.user.tag}!`);
   client.user.setGame(`in ${client.guilds.size} guilds! | ~help`)
 });
 
@@ -34,7 +34,7 @@ function clean(text) {
 }
 
 client.on('guildCreate', guild => {
-  guild.defaultChannel.send('Hey! Thanks for inviting me to your server!\n\n- To see my commands, do: ~help\nTo see my support server, go to: https://discord.gg/MUmX23Y')
+  guild.defaultChannel.send('Hey! Thanks for inviting me to your server!\n\n- To see my commands, do: ~help\nTo see my support server, go to: <YourURL>')
 });
 
 // Message Handler Event (Commands Go Inside)
@@ -45,7 +45,6 @@ let command = message.content.split(' ')[0];
 command = command.slice(prefix.length);
 
 let args = message.content.split(' ').slice(1);
-if (Array.prototype.length == 0) return message.channel.send(`${message.author}, You must specify something to say!`);
 
 if (message.content.startsWith(config.prefix + 'say')) {
   message.delete();
@@ -55,11 +54,11 @@ if (message.content.startsWith(config.prefix + 'say')) {
 } }) }
 
 if(message.content.startsWith(config.prefix + 'ping')) {
- message.channel.send(":ping_pong: Pong!").then(m => m.edit(`Roundtrip took: **${m.createdTimestamp - message.createdTimestamp}ms.** :heart:: **${Math.round(client.ping)}ms.**`))
+ message.channel.send(`:ping_pong: Pong! | **${Date.now() - message.createdTimestamp}ms**`)
 }
 
 if(message.content.startsWith(config.prefix + 'invite')) {
- message.channel.send('To invite me to your server, go to: https://discordapp.com/oauth2/authorize?permissions=468839622&scope=bot&client_id=316119422605721600')
+ message.author.send('To invite me to your server, go to: <YourBotInviteURL>')
 }
 
 if(message.content.startsWith(config.prefix + 'rate')) {
@@ -98,14 +97,10 @@ if (message.content.startsWith(config.prefix + 'roll')) {
   message.channel.send(`My number is... ${(Math.floor(Math.random() * 999))}`)
 }
 
-if (message.content.startsWith(config.prefix + 'ohfuk!')) {
-  message.channel.send('https://cdn.discordapp.com/attachments/318322636700516352/319052440014159873/image.jpg')
-}
-
 if (message.content.startsWith(config.prefix + 'help')) {
   message.react('👌');
   message.channel.send('You\'ve been DMed a list of commands! :mailbox_with_mail:')
-  message.author.send(`__Abstract Commands__\n\n__Fun__\n**ping**: Checks if the bot\'s still alive\n**roll**: Rolls a random number!\n**rate**: Will rate the user who said it\n**ohfuk!**: Will show a funny \'Oh F%^*&\'reference\n**8ball**: The bot will respond to any question you throw at it! (This is, of course, with the set responses)\n**flipcoin**: The bot will respond with either heads or tails!\n**say**: Will say the users input!\n**kiss**: Will kiss the user specified, how cute! o<3\n**gay**: Will call the user specified gay!\n**avatar**: Displays the users avatar! (Works with GIFs too!)\n**lenny**: Will create a lenny face!\n**tableflip**: The bot will throw tables!\n**unflip**: Unflips a table!\n\n__Moderation__\n**purge**: The bot will purge any message (Limit: 2 - 100 Messages)\n**ban**: Bans the user specified\n**kick**: Kicks the user specified\n\n__Utility__\n**support**: Directs you to the support server!\n**invite**: Gives bot invite link, this is useful for adding the bot to your server!`)
+  message.author.send(`__<botname> Commands__\n\n__Fun__\n**ping**: Checks if the bot\'s still alive\n**roll**: Rolls a random number!\n**rate**: Will rate the user who said it\n**8ball**: The bot will respond to any question you throw at it! (This is, of course, with the set responses)\n**flipcoin**: The bot will respond with either heads or tails!\n**say**: Will say the users input!\n**avatar**: Displays the users avatar! (Works with GIFs too!)\n**lenny**: Will create a lenny face!\n**tableflip**: The bot will throw tables!\n**unflip**: Unflips a table!\n**f**: Pay your respects\n\n__Moderation__\n**purge**: The bot will purge any message (Limit: 2 - 100 Messages)\n**ban**: Bans the user specified\n**kick**: Kicks the user specified\n**mute**: Mutes the user specified\n**unmute**: Unmutes the user specified\n\n__Utility__\n**support**: Directs you to the support server!\n**invite**: Gives bot invite link, this is useful for adding the bot to your server!`)
 }
 
 if (message.content.startsWith(config.prefix + 'avatar')) {
@@ -113,9 +108,9 @@ if (message.content.startsWith(config.prefix + 'avatar')) {
 }
 
 if (message.content.startsWith(config.prefix + 'support')) {
-  message.channel.send({embed: {
+  message.author.send({embed: {
     color: 0xe0bee5,
-    description: 'For real-time support, and more, join: https://discord.gg/nJVjcRt'
+    description: 'For real-time support, and more, join: <yourURL>'
 } }) }
 
 if (message.content.startsWith(config.prefix + '8ball')) {
@@ -129,7 +124,7 @@ if (message.content.startsWith(config.prefix + 'flipcoin')) {
 if (message.content.startsWith(config.prefix + 'purge')) {
   message.delete();
 
-  if (!message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES")) {
+  if (!message.member.permissions.has("MANAGE_MESSAGES")) {
     message.channel.send('Sorry, I do not have permission to execute the "purge" command!');
     return;
   } else if (!message.channel.permissionsFor(client.user).has("MANAGE_MESSAGES")) {
@@ -150,36 +145,6 @@ message.channel.fetchMessages({
   message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
 }) }
 
-  if (message.content.startsWith(config.prefix + 'eval')) {
-    if(message.author.id !== config.ownerID) return;
-    try {
-      const code = args.join(' ');
-      let evaled = eval(code);
-
-      if (typeof evaled !== 'string')
-        evaled = require('util').inspect(evaled);
-
-      message.channel.send(clean(evaled), {code:'xl'});
-    } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-  }
-
-  if (message.content.startsWith(config.prefix + 'kiss')) {
-  let userToKiss = message.mentions.users.first();
-  if (message.author === message.mentions.users) return;
-  message.channel.send(`Aw shit, Aw shit, it's happening! ${message.author} just kissed ${userToKiss}!\n\nhttps://media.giphy.com/media/bm2O3nXTcKJeU/giphy.gif)}`)
-}
-
-let userIsGay = message.mentions.users.first();
-
-if (message.content.startsWith(config.prefix + 'gay')) {
-  if (message.author === message.mentions.users.first()) return;
-  message.channel.send('Dumbass, you can\'t call yourself gay')
-
-  message.channel.send(`${message.author} just called ${userIsGay} gay! :gay_pride_flag:`)
-}
-
 if (message.content.startsWith(config.prefix + 'lenny')) {
   message.channel.send('( ͡° ͜ʖ ͡°)')
 }
@@ -193,6 +158,62 @@ if (message.content.startsWith(config.prefix + 'unflip')) {
   message.delete();
   message.channel.send('Whoops! Flipped another table, lemme get that. ┬──┬﻿ ¯\_(ツ)')
 }
+
+if (message.content.startsWith(prefix + 'f')) {
+  message.channel.send(`${message.author.username} paid their respects! :blue_heart:`)
+}
+
+let Botrole = message.guild.roles.find("name", "Bot Commander");
+if (!Botrole) return message.channel.send('You must make a role called "Bot Commander" to use this command!')
+
+  if (message.content.startsWith(config.prefix + 'mute')) {
+    let user = message.mentions.users.first();
+    var member = message.guild.member(user);
+    if (!message.member.permissions.has("MANAGE_ROLES")) {
+      message.channel.send('Sorry, I do not have permission to execute the "mute" command!');
+      return;
+    } else if (!message.channel.permissionsFor(client.user).has("MANAGE_ROLES")) {
+      message.channel.send("Sorry, I do not have permission to execute this command!");
+      return;
+    }
+    if(!user) return message.channel.send({embed: {
+      color: 0xFF0000,
+      author: {
+      },
+      title: 'User not found',
+      description: "Please specify a valid user to mute!",
+      timestamp: new Date(),
+    }});
+    if(member.roles.has(Botrole.id)) return message.channel.send('This user can\'t be muted, as they have the Bot Commander role, Bot Commanders control the bot')
+    let Muted = message.guild.roles.find("name", "Muted");
+    if(!Muted) return message.channel.send({embed: {
+      color: 0xFF0000,
+      author: {
+      },
+      title: 'Unable To Mute',
+      description: `${user} was unable to be muted`,
+      timestamp: new Date(),
+    }});
+    message.channel.send({embed: {
+      color: 0x22FF2C,
+      author: {
+      },
+      title: 'Successfully Muted',
+      description: `${user} was successfully muted :zipper_mouth:`,
+      timestamp: new Date(),
+    }});
+    message.guild.member(user).addRole(Muted);
+    }
+
+    if (message.content.startsWith(prefix + 'unmute')) {
+    if(!message.guild.member(client.user).has("MANAGE_ROLES_OR_PERMISSIONS")) return message.channel.send('__**Insufficient Permissions**__\nPlease give the bot the required permissions. kthx')
+    let user = message.mentions.users.first();
+    if(!user) return message.channel.send('__**User not found**__\nPlease input a valid user to unmute!')
+    let Muted = message.guild.roles.find("name", "Muted");
+    if(!Muted) return message.channel.send('This user was unabled to be muted!')
+    message.guild.member(user).removeRole(Muted);
+    message.channel.send(`__**Successfully Unmuted**__\n${user} was successfully unmuted!`)
+  }
 
 });
 // Commands will go up there, not below or above
