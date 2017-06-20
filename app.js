@@ -1,6 +1,11 @@
-/* This is JavaScript code, I used this with my bot, it's still in working order, as long as you're using the correct Node version.
+/* 
+This is JavaScript code, I used this with my bot, it's still in working order, as long as you're using the correct Node version.
 This also comes with commands, I have highlighted certain zones where my bot link was, or my bot name was, for you to replace with your 
 own.
+
+You'll also notice that I've used 'config.<somethingHere>' all over my code, if you don't have a config.json folder, don't worry, 
+remove the 'const config = require('./config.json');' and change the `config.<somethingHere>` to either prefix or token, but the only
+time you'd have to do 'config.token' is at the bottom for the bot login.
 
 My Node Version:
 v6.10.2
@@ -220,6 +225,7 @@ if (!Botrole) return message.channel.send('You must make a role called "Bot Comm
 
 client.login(config.token);
 
-/* Make sure you have a config file before doing 'config.token'!
+/* 
+Make sure you have a config file before doing 'config.token'!
 If not, just put your token there
 */
