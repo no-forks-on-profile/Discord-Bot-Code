@@ -123,7 +123,7 @@ if (message.content.startsWith(config.prefix + 'roll')) {
 if (message.content.startsWith(config.prefix + 'help')) {
   message.react('👌');
   message.channel.send('You\'ve been DMed a list of commands! :mailbox_with_mail:')
-  message.author.send(`__<botname> Commands__\n\n__Fun__\n**ping**: Checks if the bot\'s still alive\n**roll**: Rolls a random number!\n**rate**: Will rate the user who said it\n**8ball**: The bot will respond to any question you throw at it! (This is, of course, with the set responses)\n**flipcoin**: The bot will respond with either heads or tails!\n**say**: Will say the users input!\n**avatar**: Displays the users avatar! (Works with GIFs too!)\n**lenny**: Will create a lenny face!\n**tableflip**: The bot will throw tables!\n**unflip**: Unflips a table!\n**f**: Pay your respects\n\n__Moderation__\n**purge**: The bot will purge any message (Limit: 2 - 100 Messages)\n**ban**: Bans the user specified\n**kick**: Kicks the user specified\n**mute**: Mutes the user specified\n**unmute**: Unmutes the user specified\n\n__Utility__\n**support**: Directs you to the support server!\n**invite**: Gives bot invite link, this is useful for adding the bot to your server!`)
+  message.author.send(`__<botname> Commands__\n\n__Fun__\n**ping**: Checks if the bot\'s still alive\n**roll**: Rolls a random number!\n**rate**: Will rate the user who said it\n**8ball**: The bot will respond to any question you throw at it! (This is, of course, with the set responses)\n**flipcoin**: The bot will respond with either heads or tails!\n**say**: Will say the users input!\n**avatar**: Displays the users avatar! (Works with GIFs too!)\n**lenny**: Will create a lenny face!\n**tableflip**: The bot will throw tables!\n**unflip**: Unflips a table!\n**f**: Pay your respects\n\n__Moderation__\n**purge**: The bot will purge any message (Limit: 2 - 100 Messages)\n**ban**: Bans the user specified\n**kick**: Kicks the user specified\n**mute**: Mutes the user specified\n**unmute**: Unmutes the user specified\n\n__Utility__\n**support**: Directs you to the support server!\n**invite**: Gives bot invite link, this is useful for adding the bot to your server!\n**uptime**: Shows bot uptime`)
 }
 
 if (message.content.startsWith(config.prefix + 'avatar')) {
@@ -237,6 +237,19 @@ if (!Botrole) return message.channel.send('You must make a role called "Bot Comm
     message.guild.member(user).removeRole(Muted);
     message.channel.send(`__**Successfully Unmuted**__\n${user} was successfully unmuted!`)
   }
+  
+  if (message.content.startsWith(config.prefix + 'uptime')) {
+var milliseconds = parseInt((client.uptime % 1000) / 100),
+       seconds = parseInt((client.uptime / 1000) % 60),
+       minutes = parseInt((client.uptime / (1000 * 60)) % 60),
+       hours = parseInt((client.uptime / (1000 * 60 * 60)) % 24);
+
+       hours = (hours < 10) ? "0" + hours : hours;
+       minutes = (minutes < 10) ? "0" + minutes : minutes;
+       seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+       message.channel.send(":chart_with_upwards_trend: I've been running for** " + hours + " **hours, **" + minutes + "** minutes and **" + seconds + "." + milliseconds + "** seconds!");
+}
 
 });
 // Commands will go up there, not below or above
