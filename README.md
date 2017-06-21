@@ -1,10 +1,10 @@
-Discord-Bot-Code / Fr33Software:
+# Discord-Bot-Code / Fr33Software:
 As you probably know, this repository comes from an organization called 'Fr33Software', Fr33Software produces free to use code, but it's not all free. There are copyright laws and certain rules, please read this before continuing.
 
-Broken/Old Code Sorting and Fixing:
+# Broken/Old Code Sorting and Fixing:
 To do this, myself (and other contributors) will edit/fork and edit code, if they're outdated (although it may take some time) they'll be fixed.
 
-License:
+# License:
 All code is free to use, but under the condition of the MIT License, found below: 
 
 The MIT License (MIT)
