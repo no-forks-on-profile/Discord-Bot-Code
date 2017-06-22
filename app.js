@@ -250,6 +250,39 @@ var milliseconds = parseInt((client.uptime % 1000) / 100),
 
        message.channel.send(":chart_with_upwards_trend: I've been running for** " + hours + " **hours, **" + minutes + "** minutes and **" + seconds + "." + milliseconds + "** seconds!");
 }
+  
+  if (message.content.startsWith(prefix + 'serverinfo')) {
+  message.channel.send({embed: {
+  color: 0x1b74f9,
+  author: {
+    name: '',
+  },
+  title: `${message.guild.name}`,
+  description: '',
+  fields: [{
+      name: 'Owner',
+      value: `${message.channel.guild.owner.user.tag} (${message.channel.guild.owner.user.id})`
+    },
+    {
+      name: 'Members',
+      value: `${message.guild.memberCount}`
+    },
+    {
+      name: 'Region',
+      value: `${message.guild.region}`
+    },
+    {
+      name: 'Server ID',
+      value: `${message.guild.id}`
+    },
+    {
+      name: 'Default Channel',
+      value: `${message.guild.defaultChannel}`
+    },
+  ],
+}
+})
+}
 
 });
 // Commands will go up there, not below or above
