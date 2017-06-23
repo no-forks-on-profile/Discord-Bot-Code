@@ -1,1 +1,22 @@
+const responses = [
+   'Yes', 'No', 'Maybe', 'Definitely', 'Probably', 'Ask me later', 'Definately not', 'Try again', 'Who knows?', 'Totally.'
+]
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+let prefix = '#';
+
+client.on('message', message => {
+  if (message.content.startsWith(prefix+ 'ping')) {
+    message.reply('Pong!');
+  }
+  if (message.content.startsWith(prefix+ '8ball')) {
+   message.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+  }
+});
+
+client.login('token');
